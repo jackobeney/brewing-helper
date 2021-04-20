@@ -16,7 +16,8 @@ body.pink {
   --main-color: pink;
 }
 
-button {
+button,
+input {
   border: none;
   margin: 0;
   padding: 0;
@@ -25,6 +26,14 @@ button {
   background: transparent;
   color: inherit;
   font: inherit;
+}
+
+input {
+	display: inline-block;
+	vertical-align: middle;
+	white-space: normal;
+	background: none;
+	line-height: 1;
 }
 
 button:focus,
@@ -95,6 +104,7 @@ h4 {
 
 input {
   width: 5rem;
+  padding: 3px 0 1px 5px;
 }
 
 input,
@@ -106,20 +116,19 @@ select {
 .input-suffix {
   border: 2px solid #000;
   border-left: none;
-  margin-left: -9px;
+  padding: 3px 0 1px 0;
 }
 
 .input-suffix__temperature::before {
   content: '˚C';
-  padding-right: 3px;
-  vertical-align: bottom;
 }
 
 .input-suffix__volume::before {
   content: '\00a0\L';
-  /* padding: 0 4px; */
-  padding-right: 3px;
-  vertical-align: middle;
+}
+
+.has-suffix{
+  display: flex;
 }
 
 .has-suffix input {
@@ -179,4 +188,3 @@ select {
 .calculation-result__sugar span {
   flex: 2;
 }
-
