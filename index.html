@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Brew Helper</title>
+    <meta name="description" content="Calculators to help with brewing" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+  </head>
+  <body>
+    <h2 class="title">brew helper</h2>
+
+    <div class="tab-selection">
+      <button class="button tab-selection__option" id="abv-tab" onclick="switchTab(this, 'abv')">ABV calculator</button>
+      <button class="button tab-selection__option" id="hydrometer-tab" onclick="switchTab(this, 'hydrometer')">
+        hydrometer temperature correction
+      </button>
+      <button class="button tab-selection__option" id="priming-tab" onclick="switchTab(this, 'priming')">
+        priming sugar calculator
+      </button>
+    </div>
+
+    <div class="calculator calculator__abv hidden" id="abv-calculator">
+      <h4>Original Gravity</h4>
+      <div class="input-container-group">
+        <div class="input-container">
+          <label for="sg-input">SG: </label>
+          <input type="number" name="sg-og-input" id="sg-og-input" value="1.050" />
+        </div>
+        <div class="input-container">
+          <label for="plato-input">Plato: </label>
+          <input type="number" name="plato-og-input" id="plato-og-input" value="12.4" />
+        </div>
+      </div>
+
+      <h4>Final Gravity</h4>
+      <div class="input-container-group">
+        <div class="input-container">
+          <label for="sg-input">SG: </label>
+          <input type="number" name="sg-fg-input" id="sg-fg-input" value="1.005" />
+        </div>
+        <div class="input-container">
+          <label for="plato-input">Plato: </label>
+          <input type="number" name="plato-fg-input" id="plato-fg-input" value="1.3" />
+        </div>
+      </div>
+
+      <div class="calculate-button-container">
+        <button class="button calculate-button" type="button" onclick="calculateAbv()">Calculate</button>
+      </div>
+
+      <div class="calculation-result hidden" id="calculation-result--abv">
+        <label for="abv-result">ABV: </label>
+        <span name="abv-result" id="abv-result"></span>
+      </div>
+    </div>
+    <div class="calculator calculator__hydrometer-correction hidden" id="hydrometer-correction">
+      <div class="input-container-group">
+        <div class="input-container">
+          <label for="reading-input">reading: </label>
+          <input type="number" name="reading-input" id="reading-input" value="1.050" />
+        </div>
+
+        <div class="input-container">
+          <label for="temperature-input">temperature: </label>
+          <span class="has-suffix">
+            <input type="number" name="temperature-input" id="temperature-input" value="35" />
+            <span class="input-suffix input-suffix__temperature"></span>
+          </span>
+        </div>
+
+        <div class="input-container">
+          <label for="calibration-input">calibration: </label>
+          <span class="has-suffix">
+            <input type="number" name="calibration-input" id="calibration-input" value="20" />
+            <span class="input-suffix input-suffix__temperature"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="calculate-button-container">
+        <button class="button calculate-button" type="button" onclick="calculateHydrometerReading()">Calculate</button>
+      </div>
+
+      <div class="calculation-result hidden" id="calculation-result--hydrometer">
+        <label for="hydrometer-correction-result">adjusted value: </label>
+        <span name="hydrometer-correction-result" id="hydrometer-correction-result"></span>
+      </div>
+    </div>
+    <div class="calculator calculator__priming-sugar hidden" id="priming-calculator">
+      <div class="input-container-group">
+        <div class="input-container">
+          <label for="co2-input">CO₂ volume: </label>
+          <input type="number" name="co2-input" id="co2-input" />
+          <span>OR</span>
+        </div>
+        <div class="input-container">
+          <select id="beer-style">
+            <option value="0">choose a style…</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <label for="beer-volume-input">beer volume: </label>
+          <span class="has-suffix">
+            <input type="number" name="beer-volume-input" id="beer-volume-input" value="12" />
+            <span class="input-suffix input-suffix__volume"></span>
+          </span>
+        </div>
+
+        <div class="input-container">
+          <label for="room-temperature-input">temperature: </label>
+          <span class="has-suffix">
+            <input type="number" name="room-temperature-input" id="room-temperature-input" value="20" />
+            <span class="input-suffix input-suffix__temperature"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="calculate-button-container">
+        <button class="button calculate-button" type="button" onclick="calculateSugarAmounts()">Calculate</button>
+      </div>
+
+      <div class="calculation-result calculation-result--priming-sugar hidden" id="calculation-result--priming-sugar">
+        <div class="calculation-result__sugar">
+          <label for="dextrose-result">dextrose: </label>
+          <span name="dextrose-result" id="dextrose-result"></span>
+        </div>
+        <div class="calculation-result__sugar">
+          <label for="sucrose-result">sucrose: </label>
+          <span name="sucrose-result" id="sucrose-result"></span>
+        </div>
+        <div class="calculation-result__sugar">
+          <label for="honey-result">honey: </label>
+          <span name="honey-result" id="honey-result"></span>
+        </div>
+      </div>
+    </div>
+
+    <script src="tabs.js" async defer></script>
+    <script src="abv-calculator.js" async defer></script>
+    <script src="hydrometer-correction.js" async defer></script>
+    <script src="priming-sugar-calculator.js" async defer></script>
+  </body>
+</html>
